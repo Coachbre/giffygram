@@ -1,5 +1,26 @@
 {
-	"users": [],
-	"posts": [],
-	"messages":[]
+  "users": [
+    {
+      "id": 2,
+      "name": "Bre",
+      "email": "coach@yahoo.com",
+      "dateJoined": 5
+    },
+    {
+      "name": "Breanna",
+      "email": "konan@yahoo.com",
+      "dateJoined": 6,
+      "id": 3
+    },
+    {
+      "name": "coacha",
+      "email": "bre1@yahoo.com",
+      "dateJoined": 7,
+      "id": 4
+    }
+  ],
+  "posts": [
+    {}
+  ],
+  "messages": []
 }
