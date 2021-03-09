@@ -13,14 +13,25 @@
       "id": 3
     },
     {
-      "name": "coacha",
+      "name": "coachsss",
       "email": "bre1@yahoo.com",
       "dateJoined": 7,
       "id": 4
     }
   ],
+
   "posts": [
-    {}
+    {
+        "id": 1,
+        "title": "Concerned monkey",
+        "description": "sample gif",
+        "imageURL": "https://media.giphy.com/media/H5C8CevNMbpBqNqFjl/source.gif",
+        "timestamp": 1614779003353,
+        "userId": 3
+
+    }
   ],
+
+
   "messages": []
 }
