@@ -5,8 +5,8 @@ export const Post = (postObject) => {
         <header>
             <h2 class="post__title">${postObject.title}</h2>
         </header>
-        <img class="post__image" src="${postObject.imageURL}" />
-        <p>${postObject.description}</p>
+        <img class="post__image" src="${postObject.imageURL}" alt="${postObject.description}"/>
+  
       </section>
     `
   }
