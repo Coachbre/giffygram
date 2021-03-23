@@ -26,7 +26,6 @@ export const createPost = postObj => {
 }
 
 
-
 // filter posts
 let postCollection = [];
 
@@ -61,3 +60,39 @@ const loggedInUser = {
 export const getLoggedInUser = () => {
 	return {...loggedInUser};
 }
+
+//delete posts
+
+export const deletePost = postId => {
+    return fetch(`http://localhost:8088/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+  
+    })
+        .then(response => response.json())
+        .then(getPosts)
+  }
+
+  //retrieves a single post (ensures we have up to date info from the database)
+  // in regards to edit
+  export const getSinglePost = (postId) => {
+    return fetch(`http://localhost:8088/posts/${postId}`)
+      .then(response => response.json())
+  }
+
+  //updates post in the database- doesnt create new item, but replaces data
+  // that has matching ID of the users selection
+  export const updatePost = postObj => {
+    return fetch(`http://localhost:8088/posts/${postObj.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postObj)
+  
+    })
+        .then(response => response.json())
+        .then(getPosts)
+  }

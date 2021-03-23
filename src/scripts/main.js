@@ -1,7 +1,8 @@
 // Can you explain what is being imported here?
 import { getPosts, getUsers } from "./data/dataManager.js" 
-import { createPost } from "./data/dataManager.js"
+import { createPost, deletePost, getSinglePost, updatePost } from "./data/dataManager.js"
 import { PostEntry } from "./feed/PostEntry.js"
+import { PostEdit } from "./feed/PostEdit.js"
 import { getLoggedInUser} from "./data/dataManager.js"
 import { clearForm } from "./feed/PostEntry.js"
 import { PostList } from "./feed/PostList.js"
@@ -92,6 +93,73 @@ const showPostList = () => {
 		postElement.innerHTML = PostList(allPosts.reverse());
 	})
 }
+
+//event listener performs when a string beginning with 'edit' is clicked on
+//string method 'split' splits string into array substrings wherever you indicate it to
+// then returns the index that you choose
+applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("edit")) {
+		console.log(event.target.id)
+	  const postId = event.target.id.split("__")[1];
+	  console.log(postId)
+	  getSinglePost(postId)
+		.then(response => {
+		  showEdit(response); //displays a single post (defined below)
+		})
+	}
+  })
+
+  const showEdit = (postObj) => {
+	const entryElement = document.querySelector(".entryForm");
+	entryElement.innerHTML = PostEdit(postObj);
+  }
+
+
+  //event listener for when the update button is clicked
+
+  applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("updatePost")) {
+	  const postId = event.target.id.split("__")[1];
+	  //collect all the details into an object
+	  const title = document.querySelector("input[name='postTitle']").value
+	  const url = document.querySelector("input[name='postURL']").value
+	  const description = document.querySelector("textarea[name='postDescription']").value
+	  const timestamp = document.querySelector("input[name='postTime']").value
+	  
+	  const postObject = {
+		title: title,
+		imageURL: url,
+		description: description,
+		userId: getLoggedInUser().id,
+		timestamp: parseInt(timestamp),
+		id: parseInt(postId)
+	  }
+	  
+	  
+	  updatePost(postObject)
+		.then(response => {
+		  showPostList();
+		  showPostEntry();
+		})
+	}
+  })
+
+
+
+//delete a post
+applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("delete")) {
+	  const postId = event.target.id.split("__")[1];
+	//   deletePost(postId)
+	// 	.then(response => {
+	// 	  showPostList();
+	// 	})
+	console.log(event.target.id)
+	}
+  })
 
 
 // Nav bar function
