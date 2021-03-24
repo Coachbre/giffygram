@@ -51,12 +51,6 @@ export const getPosts = () => {
     })
 }
 
-const loggedInUser = {
-	id: 1,
-	name: "Bryan",
-	email: "bryan@bn.com"
-}
-
 export const getLoggedInUser = () => {
 	return {...loggedInUser};
 }
@@ -65,13 +59,13 @@ export const getLoggedInUser = () => {
 
 export const deletePost = postId => {
     return fetch(`http://localhost:8088/posts/${postId}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        method: "DELETE"
+        // headers: {
+        //     "Content-Type": "application/json"
+        // }
   
     })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(getPosts)
   }
 
@@ -95,4 +89,31 @@ export const deletePost = postId => {
     })
         .then(response => response.json())
         .then(getPosts)
+  }
+
+
+  //function should log the user OUT
+let loggedInUser = {}
+  
+  export const logoutUser = () => {
+    loggedInUser = {}
+  }
+
+//previous user (from session storage) should stay logged in
+  const checkForUser = () => {
+    if (sessionStorage.getItem("user")){
+
+        setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
+      startGiffyGram();
+
+    }else {
+      //show login/register
+      console.log("showLogin")
+    }
+  }
+  checkForUser()
+
+  // sets user
+  export const setLoggedInUser (userObj) => {
+    loggedInUser = userObj;
   }

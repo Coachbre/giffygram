@@ -1,6 +1,7 @@
 // Can you explain what is being imported here?
 import { getPosts, getUsers } from "./data/dataManager.js" 
-import { createPost, deletePost, getSinglePost, updatePost } from "./data/dataManager.js"
+import { createPost, deletePost, getSinglePost, updatePost,
+ 			logoutUser} from "./data/dataManager.js"
 import { PostEntry } from "./feed/PostEntry.js"
 import { PostEdit } from "./feed/PostEdit.js"
 import { getLoggedInUser} from "./data/dataManager.js"
@@ -153,13 +154,62 @@ applicationElement.addEventListener("click", event => {
 	event.preventDefault();
 	if (event.target.id.startsWith("delete")) {
 	  const postId = event.target.id.split("__")[1];
-	//   deletePost(postId)
-	// 	.then(response => {
-	// 	  showPostList();
-	// 	})
-	console.log(event.target.id)
+
+	  deletePost(postId)
+		.then(response => {
+		  showPostList();
+		})
+	console.log(typeof postId)
 	}
   })
+
+
+// event listener to log user out
+  applicationElement.addEventListener("click", event => {
+	if (event.target.id === "logout") {
+	  logoutUser();
+	  console.log(getLoggedInUser());
+	}
+  })
+
+
+
+  const checkForUser = () => {
+	if (sessionStorage.getItem("user")){
+		setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
+	  startGiffyGram();
+	}else {
+		 showLoginRegister();
+	}
+}
+
+const showLoginRegister = () => {
+	showNavBar();
+	const entryElement = document.querySelector(".entryForm");
+	//template strings can be used here too
+	entryElement.innerHTML = `${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+	//make sure the post list is cleared out too
+  const postElement = document.querySelector(".postList");
+  postElement.innerHTML = "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Nav bar function
@@ -176,6 +226,9 @@ const showFooter = () => {
     const footerElement = document.querySelector("footer");
 	footerElement.innerHTML = Footer();
 }
+
+
+
 
 // Runnn
 const startGiffyGram = () => {
