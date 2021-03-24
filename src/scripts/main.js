@@ -1,7 +1,7 @@
 // Can you explain what is being imported here?
 import { getPosts, getUsers } from "./data/dataManager.js" 
 import { createPost, deletePost, getSinglePost, updatePost,
- 			logoutUser} from "./data/dataManager.js"
+ 			logoutUser, setLoggedInUser, loginUser, registerUser} from "./data/dataManager.js"
 import { PostEntry } from "./feed/PostEntry.js"
 import { PostEdit } from "./feed/PostEdit.js"
 import { getLoggedInUser} from "./data/dataManager.js"
@@ -9,6 +9,8 @@ import { clearForm } from "./feed/PostEntry.js"
 import { PostList } from "./feed/PostList.js"
 import { NavBar } from "./nav/NavBar.js"
 import { Footer } from "./nav/Footer.js"
+import { LoginForm } from "./auth/LoginForm.js"
+import { RegisterForm } from "./auth/RegisterForm.js"
 
 
 // *event listener goes here ********
@@ -173,7 +175,7 @@ applicationElement.addEventListener("click", event => {
   })
 
 
-
+// checks session storage for an active user
   const checkForUser = () => {
 	if (sessionStorage.getItem("user")){
 		setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
@@ -183,6 +185,7 @@ applicationElement.addEventListener("click", event => {
 	}
 }
 
+// displays login/register forms
 const showLoginRegister = () => {
 	showNavBar();
 	const entryElement = document.querySelector(".entryForm");
@@ -194,20 +197,52 @@ const showLoginRegister = () => {
 }
 
 
+// event listener for login form submission
+// user clicks on the submit button
+applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id === "login__submit") {
+
+	  //collect all the details into an object
+	  const userObject = {
+		name: document.querySelector("input[name='name']").value,
+		email: document.querySelector("input[name='email']").value
+	  }
+	  // loginUser fetches user info from database
+	  loginUser(userObject)
+	  .then(dbUserObj => {
+		  // if theres a match, set the returned userObj equal to logged in user (setLoggedInUser) in both DataManager and sessionStorage
+		if(dbUserObj){
+		  sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+		  startGiffyGram();
+		}else {
+		  //if no match returned, display login and register forms
+		  const entryElement = document.querySelector(".entryForm");
+		  entryElement.innerHTML = `<p class="center">That user does not exist. Please try again or register for your free account.</p> ${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+		}
+	  })
+	}
+  })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  // event listener for register form submission
+  applicationElement.addEventListener("click", event => {
+	  //prevent button from functioning ??
+	event.preventDefault();
+	//if submit button is clicked
+	if (event.target.id === "register__submit") {
+	  //collect all the details into an object
+	  const userObject = {
+		name: document.querySelector("input[name='registerName']").value,
+		email: document.querySelector("input[name='registerEmail']").value
+	  }
+	  registerUser(userObject)
+	  .then(dbUserObj => {
+		sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+		startGiffyGram();
+	  })
+	}
+  })
 
 
 
@@ -227,6 +262,15 @@ const showFooter = () => {
 	footerElement.innerHTML = Footer();
 }
 
+// logout event listener
+applicationElement.addEventListener("click", event => {
+	if (event.target.id === "logout") {
+	  logoutUser();
+	  console.log(getLoggedInUser());
+	  sessionStorage.clear();
+	  checkForUser();
+	}
+  })
 
 
 
@@ -238,5 +282,5 @@ const startGiffyGram = () => {
     showFooter();
 }
 
-startGiffyGram();
+checkForUser();
 

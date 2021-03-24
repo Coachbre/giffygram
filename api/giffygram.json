@@ -17,6 +17,11 @@
       "email": "coach3@yahoo.com",
       "dateJoined": 7,
       "id": 4
+    },
+    {
+      "name": "nate",
+      "email": "nate@work.com",
+      "id": 5
     }
   ],
   "posts": [
@@ -27,6 +32,30 @@
       "imageURL": "https://media.giphy.com/media/H5C8CevNMbpBqNqFjl/source.gif",
       "timestamp": 1614779003353,
       "userId": 3
+    },
+    {
+      "title": "Baby Dog",
+      "imageURL": "https://media.giphy.com/media/1TmrEqADCCCS4/source.gif",
+      "description": "issa puppy",
+      "userId": 2,
+      "timestamp": 1616615953440,
+      "id": 2
+    },
+    {
+      "title": "Another doggo",
+      "imageURL": "https://media.giphy.com/media/QFSD9tGuryBHy/source.gif",
+      "description": "Puppyyyyyyyy",
+      "userId": 2,
+      "timestamp": 1616616027068,
+      "id": 3
+    },
+    {
+      "title": "Its puppygram now !!!!",
+      "imageURL": "https://media.giphy.com/media/rmvMh6rmX3x7O/source.gif",
+      "description": "yes, another puppy!!!",
+      "userId": 3,
+      "timestamp": 1616616146627,
+      "id": 5
     }
   ],
   "messages": []
