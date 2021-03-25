@@ -93,9 +93,10 @@ export const deletePost = postId => {
   }
 
 
-  //function should log the user OUT
 let loggedInUser = {}
   
+
+  //function should log the user OUT
   export const logoutUser = () => {
     loggedInUser = {}
   }
@@ -114,7 +115,8 @@ let loggedInUser = {}
     .then(response => response.json())
     .then(parsedUser => {
       //is there a user?
-      // console.log("parsedUser", parsedUser) --data is returned as an array
+      console.log("parsedUser", parsedUser) 
+      // --data is returned as an array and .length refers to the # of objects
       if (parsedUser.length > 0){
         setLoggedInUser(parsedUser[0]);
         return getLoggedInUser();
