@@ -146,3 +146,21 @@ let loggedInUser = {}
   }
 
 
+  //invokes getPosts in order to update state of posts and show updated content
+  export const postLike = likeObject => {
+    return fetch(`http://localhost:8088/userLikes/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(likeObject)
+    })
+      .then(response => response.json())
+      .then(getPosts)
+  }
+
+//fetches all items w/ specific postID (json-server returns an array)
+  export const getLikes = (postId) => {
+    return fetch(`http://localhost:8088/userLikes?postId=${postId}`)
+      .then(response => response.json())
+  }
