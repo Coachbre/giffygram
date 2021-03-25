@@ -22,6 +22,11 @@
       "name": "nate",
       "email": "nate@work.com",
       "id": 5
+    },
+    {
+      "name": "Nala",
+      "email": "nala@home.com",
+      "id": 6
     }
   ],
   "posts": [
@@ -56,7 +61,97 @@
       "userId": 3,
       "timestamp": 1616616146627,
       "id": 5
+    },
+    {
+      "title": "Cool Cat",
+      "imageURL": "https://media.giphy.com/media/kiBcwEXegBTACmVOnE/source.gif",
+      "description": "The coolest dog",
+      "userId": 6,
+      "timestamp": 1616698393492,
+      "id": 6
     }
   ],
-  "messages": []
+  "messages": [],
+  "userLikes": [
+    {
+      "postId": "1",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "postId": 5,
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "postId": 5,
+      "userId": 6,
+      "id": 3
+    },
+    {
+      "postId": 3,
+      "userId": 6,
+      "id": 4
+    },
+    {
+      "postId": 3,
+      "userId": 6,
+      "id": 5
+    },
+    {
+      "postId": 3,
+      "userId": 6,
+      "id": 6
+    },
+    {
+      "postId": 2,
+      "userId": 6,
+      "id": 7
+    },
+    {
+      "postId": 5,
+      "userId": 6,
+      "id": 8
+    },
+    {
+      "postId": 5,
+      "userId": 6,
+      "id": 9
+    },
+    {
+      "postId": 2,
+      "userId": 6,
+      "id": 10
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 11
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 12
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 13
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 14
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 15
+    },
+    {
+      "postId": 6,
+      "userId": 6,
+      "id": 16
+    }
+  ]
 }

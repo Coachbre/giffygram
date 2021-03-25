@@ -1,7 +1,7 @@
 // Can you explain what is being imported here?
 import { getPosts, getUsers } from "./data/dataManager.js" 
 import { createPost, deletePost, getSinglePost, updatePost,
- 			logoutUser, setLoggedInUser, loginUser, registerUser} from "./data/dataManager.js"
+ 			logoutUser, setLoggedInUser, loginUser, registerUser, postLike} from "./data/dataManager.js"
 import { PostEntry } from "./feed/PostEntry.js"
 import { PostEdit } from "./feed/PostEdit.js"
 import { getLoggedInUser} from "./data/dataManager.js"
@@ -241,6 +241,22 @@ applicationElement.addEventListener("click", event => {
 		sessionStorage.setItem("user", JSON.stringify(dbUserObj));
 		startGiffyGram();
 	  })
+	}
+  })
+
+
+// event listener for user 'likes' -posts postID and userID to the userlikes table
+  applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("like")) {
+	  const likeObject = {
+		 postId: parseInt(event.target.id.split("__")[1]),
+		 userId: getLoggedInUser().id
+	  }
+	  postLike(likeObject)
+		.then(response => {
+		  showPostList();
+		})
 	}
   })
 
